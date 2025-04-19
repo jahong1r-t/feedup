@@ -19,7 +19,7 @@ public class TranslationService {
 
         try (InputStream inputStream = TranslationService.class.getClassLoader().getResourceAsStream(filename)) {
             if (inputStream == null) {
-                System.err.println("❌ Translation file not found: " + filename);
+                System.err.println("Translation file not found: " + filename);
                 return;
             }
 
