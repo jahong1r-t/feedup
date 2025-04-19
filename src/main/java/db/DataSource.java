@@ -13,6 +13,7 @@ public class DataSource {
     static {
         try {
             Class.forName("org.postgresql.Driver");
+            initializeTables();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("PostgreSQL not found", e);
         }
@@ -29,7 +30,8 @@ public class DataSource {
                 "full_name VARCHAR(200), " +
                 "phone_number VARCHAR(20), " +
                 "language VARCHAR(10), " +
-                "role VARCHAR(20));";
+                "role VARCHAR(20))" +
+                "is_register BOOLEAN";
 
         String createProductTable = "CREATE TABLE IF NOT EXISTS products (" +
                 "id BIGINT PRIMARY KEY, " +
@@ -41,9 +43,9 @@ public class DataSource {
 
             stmt.executeUpdate(createUserTable);
             stmt.executeUpdate(createProductTable);
-            System.out.println("Jadvallar yaratildi");
+            System.out.println("All tables created");
         } catch (SQLException e) {
-            System.err.println("Jadval yaratishda xatolik: " + e.getMessage());
+            System.err.println("Error: " + e.getMessage());
         }
     }
 

@@ -16,4 +16,5 @@ public class User {
     private String phoneNumber;
     private Language language;
     private Role role;
+    private Boolean isRegister;
 }
