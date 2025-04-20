@@ -8,7 +8,7 @@ import java.sql.Statement;
 public class DataSource {
     public static final String URL = "jdbc:postgresql://localhost:5432/feedup";
     public static final String USER = "postgres";
-    public static final String PASSWORD = "root1234";
+    public static final String PASSWORD = "Root1234";
 
     static {
         try {
@@ -34,9 +34,13 @@ public class DataSource {
                 "is_register BOOLEAN";
 
         String createProductTable = "CREATE TABLE IF NOT EXISTS products (" +
-                "id BIGINT PRIMARY KEY, " +
-                "name VARCHAR(100), " +
-                "price DECIMAL);";
+                "id uuid default gen_random_uuid() PRIMARY KEY, " +
+                "name VARCHAR, " +
+                "descriptionUz VARCHAR, " +
+                "descriptionEn VARCHAR, " +
+                "descriptionRu VARCHAR, " +
+                "price DECIMAL," +
+                "photo_url VARCHAR);";
 
         try (Connection conn = getConnection();
              Statement stmt = conn.createStatement()) {

@@ -13,17 +13,18 @@ import static db.DataSource.*;
 public class UserRepository {
 
     public void addUser(User user) {
-        String sql = "INSERT INTO users(id, username, full_name, phone_number, language, role) VALUES(?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO users(id, username, full_name, phone_number, language, role,is_register) VALUES(?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setLong(1, user.getId()); // Telegram ID
+            ps.setLong(1, user.getId());
             ps.setString(2, user.getUsername());
             ps.setString(3, user.getFullName());
             ps.setString(4, user.getPhoneNumber());
             ps.setString(5, user.getLanguage().name());
             ps.setString(6, user.getRole().name());
+            ps.setBoolean(7, user.getIsRegister());
             ps.executeUpdate();
         } catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -31,7 +32,7 @@ public class UserRepository {
     }
 
     public void updateUser(User user) {
-        String sql = "UPDATE users SET username = ?, full_name = ?, phone_number = ?, language = ?, role = ? WHERE id = ?";
+        String sql = "UPDATE users SET username = ?, full_name = ?, phone_number = ?, language = ?, role = ?,is_register = ? WHERE id = ?";
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -42,6 +43,7 @@ public class UserRepository {
             ps.setString(4, user.getLanguage().name());
             ps.setString(5, user.getRole().name());
             ps.setLong(6, user.getId());
+            ps.setBoolean(7, user.getIsRegister());
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -78,7 +80,8 @@ public class UserRepository {
                         rs.getString("full_name"),
                         rs.getString("phone_number"),
                         Language.valueOf(rs.getString("language")),
-                        Role.valueOf(rs.getString("role"))
+                        Role.valueOf(rs.getString("role")),
+                        rs.getBoolean("is_register")
                 );
             }
         } catch (SQLException e) {
@@ -102,7 +105,8 @@ public class UserRepository {
                         rs.getString("full_name"),
                         rs.getString("phone_number"),
                         Language.valueOf(rs.getString("language")),
-                        Role.valueOf(rs.getString("role"))
+                        Role.valueOf(rs.getString("role")),
+                        rs.getBoolean("is_register")
                 ));
             }
         } catch (SQLException e) {
