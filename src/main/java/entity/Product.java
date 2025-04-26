@@ -1,13 +1,20 @@
 package entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.UUID;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Builder
 public class Product {
     private UUID id;
-    private String productName;
-    private String descriptionUz;
-    private String descriptionEn;
-    private String descriptionRu;
+    private String name;
+    private String description;
     private double price;
-    private String photoUrl;
+    private String photoId;
 }
