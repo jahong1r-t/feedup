@@ -10,6 +10,7 @@ build/
 
 src/main/resources/application.properties
 
+
 .idea/
 *.iml
 
