@@ -2,6 +2,7 @@ package db;
 
 
 import lombok.SneakyThrows;
+import util.BotConfig;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,6 +10,10 @@ import java.sql.Statement;
 
 public class DataSource {
     static Connection connection;
+
+    static {
+        new BotConfig();
+    }
 
     @SneakyThrows
     public static Statement statement() {
