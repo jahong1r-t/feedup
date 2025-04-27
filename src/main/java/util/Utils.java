@@ -147,4 +147,14 @@ public class Utils extends TelegramBot {
                 .text(message)
                 .build());
     }
+
+    @SneakyThrows
+    public void sendMessage(Long chatId, String message, ReplyKeyboard replyKeyboard) {
+        execute(SendMessage.builder()
+                .chatId(chatId)
+                .text(message)
+                .replyMarkup(replyKeyboard)
+                .build());
+    }
+
 }

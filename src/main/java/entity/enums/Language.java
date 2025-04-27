@@ -1,5 +1,8 @@
 package entity.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum Language {
     UZBEK("uz"),
     ENGLISH("en"),
@@ -11,7 +14,4 @@ public enum Language {
         this.code = code;
     }
 
-    public String getCode() {
-        return code;
-    }
 }

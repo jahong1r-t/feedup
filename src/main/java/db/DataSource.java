@@ -1,19 +1,22 @@
 package db;
 
 
+import entity.User;
+import entity.enums.State;
 import lombok.SneakyThrows;
-import util.BotConfig;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DataSource {
-    static Connection connection;
+    public static Map<Long, State> states = new HashMap<>();
+    public static final Map<Long, User> userSession = new HashMap<>();
 
-    static {
-        new BotConfig();
-    }
+
+    static Connection connection;
 
     @SneakyThrows
     public static Statement statement() {
